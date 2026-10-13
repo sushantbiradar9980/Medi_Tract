@@ -9,18 +9,19 @@ def patient():
     name TEXT,
     age INTEGER,
     gender TEXT,
+    emergency TEXT,
     disease TEXT);""")
 
     conn.commit()
     conn.close()
 
-def addPatients(name,age,gender,disease):
+def addPatients(name,age,gender,emergency,disease):
     conn =sqlite3.connect("meditract.db")
     cur =conn.cursor()
     cur.execute("""INSERT INTO 
-    patients (name,age,gender,disease)
-    VALUES (?,?,?,?)""",
-    (name,age,gender,disease))
+    patients (name,age,gender,emergency,disease)
+    VALUES (?,?,?,?,?)""",
+    (name,age,gender,emergency,disease))
 
     conn.commit()
     conn.close()
@@ -41,9 +42,9 @@ def searchPatients(name):
     conn.close()
     return row
 
-def updateDetails(name,new_age,new_disease):
+def updateDetails(name,new_age,new_emer,new_disease):
     conn =sqlite3.connect("meditract.db")
     curr =conn.cursor()
-    curr.execute("Update patients Set age =?,disease =? Where name =?",(new_age,new_disease,name))
+    curr.execute("Update patients Set age =?,emergency =?,disease =? Where name =?",(new_age,new_emer,new_disease,name))
     conn.commit()
     conn.close()

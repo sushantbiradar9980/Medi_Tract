@@ -20,7 +20,7 @@ def viewAllPatients():
 
     records = database1.getPatients()
     for i in records:
-        listBox.insert(END,f"ID : {i[0]} Name :{i[1]} Age:{i[2]} Gender: {i[3]} Diseases : {i[4]}")
+        listBox.insert(END,f"ID : {i[0]} Name :{i[1]} Age:{i[2]} Gender: {i[3]} Emergency:{i[4]} Diseases : {i[5]}")
 
     btn2 =Button(win, text ="Close ",command= win.destroy)
     btn2.pack(pady=10)

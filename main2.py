@@ -35,17 +35,29 @@ def registerPatient():
     gen2 =Radiobutton(win,text ="Female ",variable=gender_var,value="Female")
     gen2.grid(row =2,column =2)
 
+    #Emergency
+    emer = Label(win,text ="Emergency")
+    emer.grid(row =3,column =0,padx=10,pady=10)
+
+    emer_var =StringVar(value="Nooo")
+    emer1 =Radiobutton(win,text ="Yesss",variable=emer_var,value="Yesss")
+    emer1.grid(row=3,column=1)
+
+    emer2 =Radiobutton(win,text ="Nooo",variable=emer_var,value="Nooo")
+    emer2.grid(row=3,column=2)
+
     #for Diseases
     dise = Label(win,text ="Diseases : ")
-    dise.grid(row =3,column=0,padx =10,pady =10)
+    dise.grid(row =4,column=0,padx =10,pady =10)
     disTxt = Text(win,width =20,height = 4)
-    disTxt.grid(row =3,column =1,columnspan=2,padx =10,pady =10)
+    disTxt.grid(row =4,column =1,columnspan=2,padx =10,pady =10)
 
     # Get Values
     def saveData():
         p_name =p1.get()
         p_age = p2.get()
         p_gend = gender_var.get()
+        p_emer =emer_var.get()
         p_disease =disTxt.get("1.0","end-1c").strip()
 
         if p_name =="":
@@ -53,11 +65,11 @@ def registerPatient():
             #messagebox.showwarning("Please enter a name !")
             return
 
-        database1.addPatients(p_name,p_age,p_gend,p_disease)
-        messagebox.showinfo("Successfully Registered",f"Patient's Name :{p_name}\n Age : {p_age}\n Gender : {p_gend}\n Disease : {p_disease}")
+        database1.addPatients(p_name,p_age,p_gend,p_emer,p_disease)
+        messagebox.showinfo("Successfully Registered",f"Patient's Name :{p_name}\n Age : {p_age}\n Gender : {p_gend}\n Emergency :{p_emer}\n Disease : {p_disease}")
         win.destroy()
 
     #Submit
     btn = Button(win,text ="Submit ",command =saveData)
-    btn.grid(row =4,column=1,columnspan=2,pady =20)
+    btn.grid(row =5,column=1,columnspan=2,pady =20)
 

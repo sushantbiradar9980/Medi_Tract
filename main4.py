@@ -24,11 +24,17 @@ def searchRecord():
     search2 =Entry(win)
     search2.grid(row =1,column=1,padx=10,pady =5)
 
+#emergency
+    pa_emer =Label(win,text="Emergency :")
+    pa_emer.grid(row =2,column=0,padx=10,pady=10)
+    search3=Entry(win)
+    search3.grid(row=2,column=1,padx=10,pady=5)
+
 #diseases
     pa_dis =Label(win,text ="Disease :")
-    pa_dis.grid(row=2,column=0,padx=10,pady =10)
-    search3 =Text(win,width =20,height = 4)
-    search3.grid(row =2,column=1,padx=10,pady =5)
+    pa_dis.grid(row=3,column=0,padx=10,pady =10)
+    search4 =Text(win,width =20,height = 4)
+    search4.grid(row =3,column=1,padx=10,pady =5)
 
     def find():
         name =search1.get().strip()
@@ -36,8 +42,12 @@ def searchRecord():
         if(data):
             search2.delete(0,END)
             search2.insert(0,data[2])
-            search3.delete("1.0",END)
-            search3.insert("1.0",data[4])
+
+            search3.delete(0,END)
+            search3.insert(0,data[4])
+
+            search4.delete("1.0",END)
+            search4.insert("1.0",data[5])
             messagebox.showinfo("Found",f"Patient {name} Found")
         else:
             messagebox.showinfo("Error","Patient Not Found")
@@ -45,13 +55,14 @@ def searchRecord():
     def update():
         name =search1.get().strip()
         new_age= search2.get().strip()
-        new_disease = search3.get("1.0","end-1c").strip()
+        new_emer =search3.get().strip()
+        new_disease = search4.get("1.0","end-1c").strip()
 
-        if name =="" or new_age =="" or new_disease=="":
+        if name =="" or new_age =="" or new_emer =="" or new_disease=="":
             messagebox.showinfo("Warning","Search first")
             return
 
-        database1.updateDetails(name,new_age,new_disease)
+        database1.updateDetails(name,new_age,new_emer,new_disease)
         messagebox.showinfo("Success","Records Updated")
         win.destroy()
 
@@ -59,4 +70,4 @@ def searchRecord():
     btn_search.grid(row =0,column=2,padx =10)
 
     btn_update =Button(win,text ="Update",command =update)
-    btn_update.grid(row=3,column=1,pady =20)
+    btn_update.grid(row=4,column=1,pady =20)
